@@ -1,0 +1,29 @@
+version: '3'
+services:
+  qo-candidate-vouchers-db:
+    image: mysql:8
+    container_name: qo-candidate-vouchers-db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_PASSWORD: 1337
+      MYSQL_USER: godlike
+      MYSQL_ROOT_PASSWORD: 1337
+      MYSQL_ROOT_USER: root
+      MYSQL_DATABASE: qo_candidate_vouchers
+    networks:
+      - qo-candidate-vouchers-network
+  qo-candidate-vouchers-redis:
+    image: redis
+    container_name: qo-candidate-vouchers-redis
+    tty: true
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - qo-candidate-vouchers-network
+networks:
+  qo-candidate-vouchers-network:
+    driver: bridge
