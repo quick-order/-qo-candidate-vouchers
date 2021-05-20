@@ -42,6 +42,7 @@ Route::prefix('products')->group(function () {
 Route::prefix('vouchers')->group(function () {
     Route::get('', Voucher\GetVouchersController::class);
     Route::post('', Voucher\CreateVoucherController::class);
+    Route::post('order/{order}', Voucher\CreateVouchersController::class);
     Route::patch('{voucher}', Voucher\UpdateVoucherController::class);
     Route::delete('{voucher}', Voucher\DeleteVoucherController::class);
     Route::get('{voucher}', Voucher\GetVoucherController::class);
