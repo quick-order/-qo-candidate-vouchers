@@ -32,6 +32,9 @@ class Voucher extends Model
 {
     use ValidateTrait;
 
+    /**
+     * TODO talk: Voucher should reflect the database table and therefore I won't versioning Models
+     */
     protected $visible = [
         'id',
         'order_id',

@@ -36,6 +36,8 @@ class Order extends Model
     use ValidateTrait;
 
     /**
+     * TODO talk: Order should reflect the database table and therefore I won't versioning Models
+     *
      * @deprecated voucher_id Only to be used until bulk vouchers feature is launched on the app
      * @var string[]
      */

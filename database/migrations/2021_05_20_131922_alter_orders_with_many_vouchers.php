@@ -45,7 +45,7 @@ class AlterOrdersWithManyVouchers extends Migration
          *     });
          *     // TODO: DB: Consider deleting vouchers which hasnt any relation to orders table so the FK constraint is valid
          *     // TODO: DB: Afterwards change order_id column to be a required column and not nullable anymore
-         *     // TODO: Models: Update models with new changes and remove the old voucher_id
+         *     // TODO: Models: Update models with new changes and remove the old voucher_id from Order
          * }
          */
     }
