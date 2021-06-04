@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -51,14 +50,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return response()->json(
-            [
-                'errors' => [
-                    'status' => Response::HTTP_UNAUTHORIZED,
-                    'message' => 'Unauthenticated',
-                ]
-            ],
-            Response::HTTP_UNAUTHORIZED
-        );
+        return parent::render($request, $exception);
     }
 }

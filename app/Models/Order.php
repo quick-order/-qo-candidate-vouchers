@@ -4,8 +4,6 @@ namespace App\Models;
 
 use App\Traits\ValidateTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Order
@@ -35,24 +33,14 @@ class Order extends Model
 {
     use ValidateTrait;
 
-    /**
-     * TODO talk: Order should reflect the database table and therefore I won't versioning Models
-     *
-     * @deprecated voucher_id Only to be used until bulk vouchers feature is launched on the app
-     * @var string[]
-     */
     protected $visible = [
         'id',
         'voucher_id',
         'total',
-        'created_at',
-        'updated_at',
+        'updated',
+        'created'
     ];
 
-    /**
-     * @deprecated voucher_id Only to be used until bulk vouchers feature is launched on the app
-     * @var string[]
-     */
     protected $fillable = [
         'voucher_id',
         'total'
@@ -65,8 +53,8 @@ class Order extends Model
             $total += $this->lines->sum(fn (OrderLine $ol) => $ol->amount_total);
         }
 
-        foreach ($this->vouchers as $voucher) {
-            $total += $voucher->amount_original;
+        if($this->voucher) {
+            $total += $this->voucher->amount_original;
         }
 
         $this->total = $total;
@@ -76,37 +64,16 @@ class Order extends Model
         return $this->hasMany(OrderLine::class);
     }
 
-    /**
-     * @return HasMany
-     */
-    public function vouchers(): HasMany
-    {
-        return $this->hasMany(Voucher::class);
-    }
-
-    /**
-     * @deprecated voucher_id Only to be used until bulk vouchers feature is launched on the app
-     * @return BelongsTo
-     */
-    public function voucher(): BelongsTo
-    {
+    public function voucher() {
         return $this->belongsTo(Voucher::class);
     }
 
-    /**
-     * @deprecated voucher_id Only to be used until bulk vouchers feature is launched on the app
-     * @return string[]
-     */
     public static function createRules() {
         return [
             'voucher_id'           => 'int|nullable',
         ];
     }
 
-    /**
-     * @deprecated voucher_id Only to be used until bulk vouchers feature is launched on the app
-     * @return string[]
-     */
     public static function updateRules() {
         return [
             'voucher_id'           => 'int|nullable',

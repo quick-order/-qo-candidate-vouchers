@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\ValidateTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Voucher
@@ -32,60 +31,30 @@ class Voucher extends Model
 {
     use ValidateTrait;
 
-    /**
-     * TODO talk: Voucher should reflect the database table and therefore I won't versioning Models
-     */
     protected $visible = [
         'id',
-        'order_id',
         'amount_original',
         'amount_remaining',
-        'created_at',
-        'updated_at',
+        'updated',
+        'created'
     ];
 
     protected $fillable = [
-        'order_id',
         'amount_original',
         'amount_remaining'
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class);
-    }
-
-    /**
-     * @param int $orderId
-     */
-    public function setOrderId(int $orderId): void
-    {
-        $this->order_id = $orderId;
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function createRules(): array
-    {
+    public static function createRules() {
         return [
-            // TODO talk: On purpose its integer ? I know from other solutions the comma is removed on purpose :)
-            'amount_original'   => 'required|integer|min:0',
-            'amount_remaining'  => 'required|integer|min:0',
+            'amount_original'   => 'int',
+            'amount_remaining'  => 'int',
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public static function updateRules(): array
-    {
+    public static function updateRules() {
         return [
-            'amount_original'   => 'required|integer|min:0',
-            'amount_remaining'  => 'required|integer|min:0',
+            'amount_original'   => 'int',
+            'amount_remaining'  => 'int',
         ];
     }
 }

@@ -34,8 +34,8 @@ class Product extends Model
         'id',
         'price_each',
         'description',
-        'updated_at',
-        'created_at'
+        'updated',
+        'created'
     ];
 
     protected $fillable = [

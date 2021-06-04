@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        // TODO talk: Consider adding a file for each api version here
+        //
     }
 
     /**
