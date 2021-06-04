@@ -48,8 +48,8 @@ class OrderLine extends Model
         'amount_each',
         'amount_total',
         'quantity',
-        'updated',
-        'created'
+        'updated_at',
+        'created_at'
     ];
 
     protected $fillable = [
